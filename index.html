@@ -271,7 +271,9 @@
       const phone = document.getElementById('qr-phone').value;
       if(!phone){ alert('لطفاً شماره تلفن وارد کنید.'); return; }
       // open whatsapp with message
-      const msg = encodeURIComponent(`درخواست مشاوره از سایت: ${name || ''} \nخدمات: ${service || ''} \nتلفن: ${phone}`);
+      const msg = encodeURIComponent(`درخواست مشاوره از سایت: ${name || ''} 
+خدمات: ${service || ''} 
+تلفن: ${phone}`);
       window.open(`https://wa.me/989021522757?text=${msg}`,'_blank');
     }
 
@@ -290,5 +292,54 @@
     "sameAs":[],
     "description":"گروه فریلنسری طراحی گرافیک، بسته‌بندی، عکاسی، فیلمبرداری و تولید محتوا"
   }</script>
+  <!-- === USER GUIDE START === -->
+  <section id="user-guide" class="py-16 px-6 max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold mb-6 text-center">راهنمای کاربر برای ویرایش سایت</h2>
+
+    <h3 class="text-2xl font-semibold mt-8 mb-3">1) راهنمای ویرایش ظاهر (CSS)</h3>
+    <p class="mb-4">برای تغییر ظاهر سایت نیازی به کدنویسی حرفه‌ای نیست. فقط کافی است به فایل <strong>style.css</strong> بروید و بخش‌های زیر را تغییر دهید:</p>
+    <ul class="list-disc pr-6 space-y-2">
+      <li><strong>تغییر رنگ اصلی سایت:</strong><br>
+        در style.css دنبال بخش <code>:root</code> بگردید و رنگ‌ها را تغییر دهید.
+      </li>
+      <li><strong>تغییر فونت:</strong><br>
+        در بالای فایل CSS می‌تونی فونت جدید گوگل فونت اضافه و جایگزین کنی.
+      </li>
+      <li><strong>تغییر اندازه متن‌ها:</strong><br>
+        کلاس‌های <code>h1, h2, p</code> را پیدا کن و مقدار <code>font-size</code> را تغییر بده.
+      </li>
+      <li><strong>تغییر فاصله‌ها (spacing):</strong><br>
+        به دنبال مقادیر <code>margin</code> و <code>padding</code> بگرد و عددها را کم/زیاد کن.
+      </li>
+      <li><strong>تغییر پس‌زمینه بخش‌ها:</strong><br>
+        اگر بخواهی رنگ یک سکشن عوض شود، کلاس همان سکشن را پیدا کن و مقدار <code>background</code> را تغییر بده.
+      </li>
+    </ul>
+
+    <h3 class="text-2xl font-semibold mt-10 mb-3">2) راهنمای سئو (SEO)</h3>
+    <p class="mb-4">برای اینکه سایتت در گوگل بهتر دیده شود، این بخش‌ها را طبق نیازت ویرایش کن:</p>
+    <ul class="list-disc pr-6 space-y-2">
+      <li><strong>عنوان صفحه (Title):</strong><br>
+        در فایل HTML قسمت <code>&lt;title&gt;</code> را مطابق نام برندت تنظیم کن.
+      </li>
+      <li><strong>توضیحات متا (Meta Description):</strong><br>
+        توضیح کوتاه و جذاب درباره «حسینی دیزاین» بنویس تا گوگل بهتر درک کند موضوع سایت چیه.
+      </li>
+      <li><strong>تگ‌های H1 و H2:</strong><br>
+        هر صفحه فقط یک <code>H1</code> داشته باشد. بقیه تیترها <code>H2 و H3</code> باشند.
+      </li>
+      <li><strong>متن جایگزین تصاویر (alt):</strong><br>
+        برای هر تصویر alt بنویس مثل: «نمونه‌کار طراحی بسته‌بندی نوشیدنی».
+      </li>
+      <li><strong>سرعت سایت:</strong><br>
+        تصاویر را قبل از آپلود کم‌حجم کن (WebP بهتر است).
+      </li>
+      <li><strong>اسکیما (Schema JSON-LD):</strong><br>
+        بخش اسکیمای داخل head را با اطلاعات واقعی کسب‌وکارت پر کن.
+      </li>
+    </ul>
+  </section>
+  <!-- === USER GUIDE END === -->
+
 </body>
 </html>
