@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hosseini Agency | استودیو طراحی حسینی</title>
+    <style>
+        /*
+        تنظیمات فونت:
+        برای زبان فارسی، استفاده از فونت‌هایی مثل Vazirmatn، Shabnam یا IRANSans توصیه می‌شود.
+        در این مثال، از Arial به عنوان جایگزین استفاده شده است.
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary-color: #000;
+            --secondary-color: #fff;
+            --accent-color: #A08040; /* رنگ تاکیدی: طلایی/کرمی تیره */
+            --bg-dark: #1A1A1A;
+            --text-light: #DDD;
+        }
+
+        /* ریست و تنظیمات پایه */
+        body { 
+            font-family: 'Poppins', Arial, sans-serif; 
+            background: var(--secondary-color); 
+            color: var(--primary-color); 
+            margin: 0; 
+            padding: 0; 
+            direction: rtl; /* برای پشتیبانی بهتر از فارسی */
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* هدر */
+        header { 
+            text-align: center; 
+            padding: 80px 20px 60px; 
+            background: var(--bg-dark); /* پس‌زمینه تیره برای کنتراست */
+            color: var(--secondary-color);
+        }
+        .title { 
+            font-size: 56px; /* بزرگتر و تاثیرگذارتر */
+            font-weight: 300; 
+            letter-spacing: 8px; /* افزایش فاصله حروف */
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 0.2s;
+            position: relative;
+        }
+        .title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--accent-color);
+            margin: 15px auto 0;
+            opacity: 0;
+            animation: fadeIn 1.5s forwards 0.5s;
+        }
+        .subtitle { 
+            font-size: 16px; 
+            font-weight: 300;
+            margin-top: 15px; 
+            opacity: 0.8;
+            letter-spacing: 2px;
+            animation: slideInUp 1s forwards 0.8s;
+        }
+
+        /* بخش تماس */
+        .contact-info { 
+            display: flex; 
+            justify-content: center; 
+            margin-top: 40px;
+            border: 1px solid var(--accent-color);
+            padding: 15px 35px; 
+            font-size: 14px; 
+            letter-spacing: 1px; 
+            max-width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--secondary-color);
+            transition: all 0.4s ease;
+        }
+        .contact-info:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(160, 128, 64, 0.5);
+        }
+        .contact-info > div {
+            margin: 0 15px;
+        }
+        .contact-info .label { 
+            font-weight: 600; 
+            margin-bottom: 5px; 
+            color: var(--accent-color);
+        }
+        .contact-info:hover .label {
+             color: var(--primary-color);
+        }
+        .contact-info .social { 
+            opacity: 0.7;
+        }
+
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* دسته‌بندی‌ها */
+        .categories { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 15px; 
+            padding: 60px 20px; 
+            background: var(--secondary-color);
+        }
+        .cat { 
+            border: 1px solid var(--primary-color); 
+            padding: 18px 30px; /* بزرگتر و برجسته‌تر */
+            cursor: pointer; 
+            font-size: 15px; 
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        /* افکت جذاب: حرکت پس‌زمینه */
+        .cat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
+            z-index: 0;
+        }
+        .cat:hover::before {
+            transform: scaleX(1);
+        }
+        .cat span {
+            position: relative;
+            z-index: 1;
+            transition: color 0.4s ease-in-out;
+        }
+        .cat:hover span { 
+            color: var(--secondary-color); 
+        }
+
+        /* POPUP */
+        #popup { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.95); /* تیره‌تر برای حس لوکس */
+            display: none; 
+            justify-content: flex-start; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 40px 20px; 
+            overflow-y: auto; 
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #popup.show {
+            opacity: 1;
+        }
+        #popup h2 { 
+            color: var(--accent-color); 
+            margin-bottom: 30px; 
+            font-weight: 300; 
+            letter-spacing: 3px; 
+            font-size: 28px; 
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        #popup .content { 
+            width: 100%; 
+            max-width: 1400px; /* گسترده‌تر شدن محتوا */
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* سایز بزرگتر آیتم‌ها */
+            gap: 30px; 
+        }
+        .itemBox { 
+            background: var(--bg-dark); 
+            padding: 15px; 
+            border: 1px solid #333; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+        }
+        .itemBox:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .itemBox img { 
+            width: 100%; 
+            height: 320px; /* ارتفاع بیشتر برای وضوح */
+            object-fit: cover; 
+            background: #222; 
+        }
+        .caption { 
+            color: var(--text-light); 
+            font-size: 14px; 
+            margin-top: 12px; 
+            text-align: center; 
+            font-weight: 300;
+        }
+
+        #closeBtn { 
+            color: var(--secondary-color); 
+            margin-top: 50px; 
+            cursor: pointer; 
+            padding: 10px 30px; 
+            border: 1px solid var(--secondary-color); 
+            font-size: 16px; 
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        #closeBtn:hover {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 class="title">HOSSEINI AGENCY</h1>
+    <p class="subtitle">استودیو طراحی | Branding • Packaging • Graphic Design • Print Services</p>
+    <div class="contact-info">
+        <div>
+            <div class="label">تماس</div>
+            <div>09021522757</div>
+        </div>
+        <div style="border-right: 1px solid #555; padding-right: 30px;">
+            <div class="label">اینستاگرام</div>
+            <div class="social">@hosseinigd</div>
+        </div>
+    </div>
+</header>
+
+<section class="categories">
+    <div class="cat" onclick="openPopup('branding')"><span>Branding / هویت بصری</span></div>
+    <div class="cat" onclick="openPopup('packaging')"><span>Packaging / بسته‌بندی</span></div>
+    <div class="cat" onclick="openPopup('print')"><span>Print Services / خدمات چاپ</span></div>
+    <div class="cat" onclick="openPopup('bags')"><span>Shopping Bag / شاپینگ بگ</span></div>
+    <div class="cat" onclick="openPopup('cards')"><span>Business Card / کارت ویزیت</span></div>
+</section>
+
+<div id="popup">
+    <h2 id="popupTitle"></h2>
+    <div class="content" id="popupContent"></div>
+    <div id="closeBtn" onclick="closePopup()">بستن</div>
+</div>
+
+<script>
+    // بخش‌های سایت همراه با 15 جای نمونه کار پیش‌فرض
+    const data = {
+        branding: Array.from({length:15}).map((_,i)=>({ title:`نمونه کار هویت بصری ${i+1}`, image:`branding${i+1}.jpg` })),
+        packaging: Array.from({length:15}).map((_,i)=>({ title:`نمونه بسته بندی ${i+1}`, image:`pack${i+1}.jpg` })),
+        print: Array.from({length:15}).map((_,i)=>({ title:`نمونه خدمات چاپ ${i+1}`, image:`print${i+1}.jpg` })),
+        bags: Array.from({length:15}).map((_,i)=>({ title:`نمونه شاپینگ بگ ${i+1}`, image:`bag${i+1}.jpg` })),
+        cards: Array.from({length:15}).map((_,i)=>({ title:`نمونه کارت ویزیت ${i+1}`, image:`card${i+1}.jpg` }))
+    };
+
+    const titles = {
+        branding: "Branding / هویت بصری",
+        packaging: "Packaging / بسته‌بندی",
+        print: "Print Services / خدمات چاپ",
+        bags: "Shopping Bag / شاپینگ بگ",
+        cards: "Business Card / کارت ویزیت"
+    };
+
+    function openPopup(cat) {
+        const popup = document.getElementById('popup');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupContent = document.getElementById('popupContent');
+
+        // جلوگیری از اسکرول بدنه اصلی
+        document.body.style.overflow = 'hidden';
+
+        // موشن هنگام باز شدن
+        popup.style.display = 'flex';
+        setTimeout(() => {
+            popup.classList.add('show');
+        }, 10);
+        
+        popupTitle.innerText = titles[cat] || '';
+
+        popupContent.innerHTML = '';
+        data[cat].forEach(item => {
+            const box = document.createElement('div');
+            box.className = 'itemBox';
+            box.innerHTML = `
+                <img src="images/${item.image}" alt="${item.title}">
+                <p class="caption">${item.title}</p>
+            `;
+            popupContent.appendChild(box);
+        });
+    }
+
+    function closePopup() {
+        const popup = document.getElementById('popup');
+        
+        // موشن هنگام بسته شدن
+        popup.classList.remove('show');
+        
+        // بازگرداندن اسکرول
+        document.body.style.overflow = 'auto';
+
+        // تأخیر در پنهان کردن برای تکمیل انیمیشن
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, 300); // 300ms برابر با مدت زمان transition در CSS است.
+    }
+</script>
+
+</body>
+</html>
